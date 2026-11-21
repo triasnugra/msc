@@ -1,0 +1,300 @@
+{
+ "versi": 1,
+ "items": {
+  "SC-01": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SC-02": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SC-03": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SC-04": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "SV2-01": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SV2-02": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SV2-03": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "SV2-04": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "SV4-01": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SV4-02": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SV4-03": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SV4-04": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "SV4-05": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "SV5-01": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SV5-02": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SV5-03": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "SV5-04": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "SV5-05": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "SV6-01": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SV6-02": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SV6-03": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SV6-04": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SV6-05": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SV6-06": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SV6-07": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SV6-08": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SV6-09": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SV6-10": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SCTN-01": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SCTN-02": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SCTN-03": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "SCTN-04": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SCTN-05": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SCTN-06": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "SCTN-07": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "X-01": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "X-02": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "X-03": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "X-04": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "X-05": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "INFO"
+  },
+  "OTO-ANOM-R_TIDAK_KONSISTEN-scv2": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "OTO-FILL-TAK-TERVERIFIKASI-scv4": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-ANOM-MESIN_BASI-scv5": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "OTO-KLAIM-VERSI-scv5": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "OTO-RR-TP2-scv6": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "OTO-HARDCODE-scv6": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "OTO-FILL-TAK-TERVERIFIKASI-scv6": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-ANOM-ENTRY_TERBALIK-scv6": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "OTO-ANOM-PENUTUPAN_MASSAL-scv6": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-ANOM-MESIN_BASI-scv6": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  },
+  "OTO-DOKTRIN-scv6-MID_RANGE": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-DOKTRIN-scv6-LAWAN_TREN": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-DOKTRIN-scv6-NON_MAJOR_ASING": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-DOKTRIN-scv6-JENDELA_VOLUME_RENDAH": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-DOKTRIN-scv6-OVERTRADING": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-DOKTRIN-scv6-KLASTER_SATU_ARAH": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-DOKTRIN-scv6-LEVERAGE_TINGGI": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-FILL-TAK-TERVERIFIKASI-sctn": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "SEDANG"
+  },
+  "OTO-ANOM-MESIN_BASI-sctn": {
+   "pertamaTerdeteksi": 1795243337206,
+   "status": "BARU",
+   "tingkat": "TINGGI"
+  }
+ }
+}

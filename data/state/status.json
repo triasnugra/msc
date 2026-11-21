@@ -1,0 +1,53 @@
+{
+ "dibuat": 1795243337206,
+ "mesin": {
+  "sc": {
+   "ok": true,
+   "sumber": "pages",
+   "error": null,
+   "lastUpdateMs": null,
+   "jumlahBaris": 5,
+   "baruArsip": 5
+  },
+  "scv2": {
+   "ok": true,
+   "sumber": "pages",
+   "error": null,
+   "lastUpdateMs": null,
+   "jumlahBaris": 27,
+   "baruArsip": 27
+  },
+  "scv4": {
+   "ok": true,
+   "sumber": "pages",
+   "error": null,
+   "lastUpdateMs": null,
+   "jumlahBaris": 1,
+   "baruArsip": 1
+  },
+  "scv5": {
+   "ok": true,
+   "sumber": "raw",
+   "error": null,
+   "lastUpdateMs": 1795061323761,
+   "jumlahBaris": 3,
+   "baruArsip": 3
+  },
+  "scv6": {
+   "ok": true,
+   "sumber": "raw",
+   "error": null,
+   "lastUpdateMs": 1795229039358,
+   "jumlahBaris": 27,
+   "baruArsip": 27
+  },
+  "sctn": {
+   "ok": true,
+   "sumber": "pages",
+   "error": null,
+   "lastUpdateMs": 1795221982000,
+   "jumlahBaris": 7,
+   "baruArsip": 7
+  }
+ }
+}
