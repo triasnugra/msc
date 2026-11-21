@@ -1,0 +1,204 @@
+{
+  "_catatan": "Definisi operasional TERKUNCI (DOC-25). 'versi' diubah manual. definisi_hash dihitung di kode = SHA-256 dari JSON kanonik (kunci diurutkan) isi file ini TANPA field 'versi' dan tanpa kunci berawalan '_'. Mengubah isi apa pun = hash baru = epoch baru; statistik audit tidak dicampur lintas epoch. Pemetaan trigger mesin berstatus 'docstring' berarti baru dibaca dari nama/docstring; adapter wajib menaikkannya ke 'kode_dibaca' dengan bukti baris, kalau tidak tetap TIDAK_TERVERIFIKASI.",
+  "versi": "1.0.1",
+  "tipeTrigger": [
+    "DEVIATION_RECLAIM",
+    "BREAKOUT_RETEST",
+    "LEVEL_FLIP",
+    "TRENDLINE_BREAK_RETEST",
+    "THREE_TAP",
+    "FIB_PULLBACK",
+    "TANPA_KONFIRMASI",
+    "TIDAK_TERPETAKAN"
+  ],
+  "tipeTriggerKeterangan": {
+    "DEVIATION_RECLAIM": "harga menyapu high/low range lalu close kembali ke dalam range",
+    "BREAKOUT_RETEST": "close di luar level, konsolidasi 2-3 candle, lalu retest",
+    "LEVEL_FLIP": "level berbalik fungsi dengan lonjakan volume",
+    "TRENDLINE_BREAK_RETEST": "tembus trendline lalu retest",
+    "THREE_TAP": "tiga sapuan berurutan pada zona sama (opsional)",
+    "FIB_PULLBACK": "pullback ke level Fibonacci 0,75/0,786 (tambahan monitor; bukan tipe baku DOC-02)",
+    "TIDAK_TERPETAKAN": "belum terbukti dari kode mesin",
+    "TANPA_KONFIRMASI": "setup tanpa konfirmasi close yang terbukti dari kode mesin (kandidat: scv5 RANGE_EDGE)"
+  },
+  "range": {
+    "candles1h": 48,
+    "hanyaCandleClose": true,
+    "posisiEntryPct": "(entry-low)/(high-low)*100",
+    "zonaTengahPct": [
+      30,
+      70
+    ]
+  },
+  "flag": {
+    "MID_RANGE": "posisi entry 30-70% dari range 48 candle 1H yang sudah close",
+    "TERLAMBAT": "harga lewat entry searah profit > 0,5R tanpa fill, atau TP1 tersentuh sebelum fill",
+    "STOP_LEBAR": "stopPct > 2,0",
+    "STOP_SANGAT_LEBAR": "stopPct > 5,0",
+    "RR_TP1_RENDAH": "rr_sisa_tp1 < 1,2 dengan rr_sisa_tp1=|tp1-acuan|/|acuan-sl|; acuan=harga live bila sudah lewat entry, selain itu entry",
+    "LAWAN_TREN": "arah sinyal berlawanan label BTC 4H (EMA20 vs EMA50 + posisi harga + swing) DAN trigger bukan DEVIATION_RECLAIM terkonfirmasi",
+    "LAWAN_TREN_HTF": "arah sinyal berlawanan label 1D DAN 4H sekaligus",
+    "RISIKO_SQUEEZE_SHORT": "SHORT dan harga <= 1,0 x ATR(14,1D) dari low 30 hari",
+    "BTC_TENGAH_RANGE": "BTC 1H di 30-70% range 48 candle",
+    "LIKUIDITAS_RENDAH": "quoteVolume 24j < 20 juta USDT",
+    "LIKUIDITAS_EKSTREM_RENDAH": "quoteVolume 24j < 10 juta USDT",
+    "NON_MAJOR_ASING": "koin di luar top-25 volume saat sinyal",
+    "JENDELA_VOLUME_RENDAH": "Sabtu-Minggu UTC atau tanggal di data/events.json 'libur'",
+    "EVENT_DEKAT": "FOMC/CPI dalam 24 jam",
+    "EVENT_SANGAT_DEKAT": "FOMC/CPI dalam <= 60 menit",
+    "COOLDOWN_PASCA_SHOCK": "candle 1D BTC bergerak > 6% atau ATR(1H) BTC > 2 x median 7 hari, berlaku 24 jam",
+    "PENUTUPAN_PERIODE": "sinyal terbit dalam 12 jam sebelum close mingguan (Minggu 24:00 UTC) atau bulanan (hari terakhir bulan 24:00 UTC)",
+    "OVERTRADING": "> 2 sinyal/jam per mesin atau > 4/jam gabungan; klaster: >= 4 sinyal arah sama dalam 60 menit",
+    "LEVERAGE_TINGGI": "leverage disarankan mesin > 5x",
+    "TANPA_KONFIRMASI": "setup tanpa konfirmasi close terbukti dari kode",
+    "KONFLUENSI_FIB": "entry dalam 0,3 x ATR(1H) dari level 0,75/0,786 impuls 1H terakhir (anotasi)",
+    "VOLUME_KONFIRMASI": "volume candle pemicu / rata-rata 20 candle >= 1,5 (anotasi; tidak dipakai bila likuiditas rendah)",
+    "VOLUME_LEMAH": "rasio volume < 1,5 (anotasi)",
+    "OBV_DIVERGENSI_BULL": "harga lower low, OBV higher low dalam 30 candle 1H/4H (anotasi; hanya BTC/ETH dan koin di atas ambang likuiditas)",
+    "OBV_DIVERGENSI_BEAR": "kebalikan OBV_DIVERGENSI_BULL (anotasi)",
+    "OBV_V": "OBV berbalik tajam dari dasar (anotasi)",
+    "OBV_TIDAK_ANDAL": "koin di bawah ambang likuiditas",
+    "THREE_TAP": "tiga sapuan pada zona sama (toleransi 0,3 x ATR 1H) dalam <= 48 candle 1H, tiap sapuan close kembali ke dalam range; arah sinyal berlawanan dengan sapuan terakhir",
+    "FVG_DEKAT": "entry atau TP1 di dalam/tepi FVG searah (celah tiga candle, TF 1H/4H, belum terisi penuh), dalam 0,3 x ATR(1H)"
+  },
+  "fvg": {
+    "bullish": "high candle-1 < low candle-3",
+    "bearish": "low candle-1 > high candle-3"
+  },
+  "labelTren": {
+    "bull": "EMA20 > EMA50 dan harga > EMA20",
+    "bear": "EMA20 < EMA50 dan harga < EMA20",
+    "range": "selain itu",
+    "smaAnotasi": 200
+  },
+  "modeSpot": {
+    "tandai": "MODE=SPOT",
+    "keluarkanDariStatistikScalp": true,
+    "pemicu": "profil mesin yang melarang short dan tanpa leverage (mis. scv5 strategy.spot)"
+  },
+  "petaTriggerMesin": {
+    "sc": {
+      "sweep": {
+        "tipe": "DEVIATION_RECLAIM",
+        "status": "kode_dibaca",
+        "bukti": "core.mjs baris 35-36: swing low/high disapu lalu close kembali + volume >= volMult x median"
+      },
+      "pullback": {
+        "tipe": "FIB_PULLBACK_BUKAN",
+        "tipeBaku": "TIDAK_TERPETAKAN",
+        "status": "kode_dibaca",
+        "bukti": "core.mjs baris 38-39: pullback ke EMA20 searah tren BTC, bukan trigger DOC-02"
+      }
+    },
+    "scv2": {
+      "T1": {
+        "tipe": "DEVIATION_RECLAIM",
+        "status": "docstring",
+        "bukti": "scalp/triggers/t1_sweep.py docstring: Deviation + Reclaim"
+      },
+      "T2": {
+        "tipe": "BREAKOUT_RETEST",
+        "status": "docstring",
+        "bukti": "scalp/triggers/t2_breakout.py docstring: Breakout -> Retest"
+      },
+      "T3": {
+        "tipe": "FIB_PULLBACK",
+        "status": "docstring",
+        "bukti": "scalp/triggers/t3_fib.py docstring: Pullback Fibonacci 0.75/0.786"
+      },
+      "T4": {
+        "tipe": "TIDAK_TERPETAKAN",
+        "status": "docstring",
+        "bukti": "scalp/triggers/t4_flip.py docstring: Reclaim trendline / flip EMA (belum dibaca untuk menentukan LEVEL_FLIP atau TRENDLINE_BREAK_RETEST)"
+      }
+    },
+    "scv4": {
+      "T1": {
+        "tipe": "DEVIATION_RECLAIM",
+        "status": "docstring",
+        "bukti": "README scv4 tabel G5 dan scalp/triggers.py (t1 baris 177)"
+      },
+      "T2": {
+        "tipe": "BREAKOUT_RETEST",
+        "status": "docstring",
+        "bukti": "README scv4 tabel G5; scalp/triggers.py (t2 baris 208)"
+      },
+      "T3": {
+        "tipe": "FIB_PULLBACK",
+        "status": "docstring",
+        "bukti": "README scv4 tabel G5: pullback fib 0.75/0.786"
+      },
+      "T4": {
+        "tipe": "TIDAK_TERPETAKAN",
+        "status": "docstring",
+        "bukti": "README scv4 tabel G5: reclaim trendline / flip EMA"
+      }
+    },
+    "scv5": {
+      "DEVIATION": {
+        "tipe": "DEVIATION_RECLAIM",
+        "status": "kode_dibaca",
+        "bukti": "scalp/journal SIGNAL.reasons: 'Sweep ... lalu reclaim close kembali ke dalam; tunggu retest'"
+      },
+      "BREAKOUT_RETEST": {
+        "tipe": "BREAKOUT_RETEST",
+        "status": "docstring",
+        "bukti": "scalp/setups.py detect_breakout_retest baris 174"
+      },
+      "RANGE_EDGE": {
+        "tipe": "TANPA_KONFIRMASI",
+        "status": "docstring",
+        "bukti": "scalp/setups.py detect_range_edge baris 127; belum dibuktikan ada atau tidak ada konfirmasi close (kandidat TANPA_KONFIRMASI)"
+      }
+    },
+    "scv6": {
+      "LIQUIDITY_SWEEP_RECLAIM": {
+        "tipe": "DEVIATION_RECLAIM",
+        "status": "docstring",
+        "bukti": "src/eliz-scalp-engine.mjs baris 121; candle 15m terakhir tidak difilter 'sudah close' (poin f), jadi konfirmasi close TIDAK TERVERIFIKASI"
+      },
+      "DEVIATION_REJECTION_SHORT": {
+        "tipe": "DEVIATION_RECLAIM",
+        "status": "docstring",
+        "bukti": "src/eliz-scalp-engine.mjs baris 170"
+      },
+      "ELIZ_FIB_075_BOUNCE": {
+        "tipe": "FIB_PULLBACK",
+        "status": "docstring",
+        "bukti": "src/eliz-scalp-engine.mjs baris 205"
+      },
+      "EMA_FLIP_SQUEEZE": {
+        "tipe": "TIDAK_TERPETAKAN",
+        "status": "docstring",
+        "bukti": "src/eliz-scalp-engine.mjs baris 237"
+      }
+    },
+    "sctn": {
+      "deviation_reclaim": {
+        "tipe": "DEVIATION_RECLAIM",
+        "status": "docstring",
+        "bukti": "src/signal/signal_engine.py TRIG_KEYS baris 18"
+      },
+      "breakout_retest": {
+        "tipe": "BREAKOUT_RETEST",
+        "status": "docstring",
+        "bukti": "src/signal/signal_engine.py TRIG_KEYS baris 18"
+      },
+      "fib_075": {
+        "tipe": "FIB_PULLBACK",
+        "status": "docstring",
+        "bukti": "src/signal/signal_engine.py TRIG_KEYS baris 19"
+      }
+    }
+  },
+  "pendekatan": {
+    "candlePemicuVolume": "candle 1H sudah close terakhir sebelum waktu acuan keputusan (bukan candle pemicu asli mesin)",
+    "impulsFib": "impuls = low terendah ke high tertinggi dari 48 candle 1H close; arah impuls menurut urutan indeks low dan high",
+    "threeTap": "tap = candle dengan high (atau low) dalam 0,3 x ATR(1H) dari level ekstrem dan close kembali di sisi dalam; minimal 3 tap tidak berurutan dalam 48 candle; entry dalam 1,0 x ATR(1H) dari level; arah sinyal berlawanan sisi sapuan",
+    "obvV": "OBV minimum jendela ada dalam 12 candle terakhir (bukan 2 terakhir) dan OBV sekarang pulih >= 50% dari rentang OBV jendela 30 candle",
+    "obvDivergensi": "bandingkan dasar/puncak paruh pertama dan paruh kedua jendela 30 candle: harga lower low dengan OBV higher low (bull), harga higher high dengan OBV lower high (bear)",
+    "labelTrenStruktur": "struktur swing (pivot N=3) hanya anotasi di konteks pasar; label tren memakai aturan EMA saja",
+    "lawanTrenTerkonfirmasi": "pengecualian LAWAN_TREN hanya untuk DEVIATION_RECLAIM dengan status pemetaan kode_dibaca",
+    "konteksPending": "keputusan hanya untuk sinyal PENDING dan OPEN dengan terisi=null (fill tidak diketahui); sinyal yang terbukti terisi tidak diberi keputusan masuk"
+  }
+}

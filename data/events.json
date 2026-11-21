@@ -1,0 +1,13 @@
+{
+  "_catatan": "ISI MANUAL dari sumber resmi (federalreserve.gov untuk FOMC, bls.gov untuk CPI). Monitor TIDAK mengarang tanggal. Selama 'events' kosong, dashboard menulis 'Jadwal event belum terverifikasi'. Waktu rilis ditulis sebagai waktu lokal New York agar DST dihitung benar.",
+  "versi": 1,
+  "diperbaruiOleh": "manual",
+  "diperbaruiPada": null,
+  "events": [],
+  "_contohFormatEvents": [
+    { "jenis": "FOMC", "nama": "FOMC Rate Decision", "tanggalNY": "YYYY-MM-DD", "jamNY": "14:00", "sumberUrl": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" },
+    { "jenis": "CPI", "nama": "US CPI", "tanggalNY": "YYYY-MM-DD", "jamNY": "08:30", "sumberUrl": "https://www.bls.gov/schedule/news_release/cpi.htm" }
+  ],
+  "libur": [],
+  "_contohFormatLibur": [ { "tanggalUtc": "YYYY-MM-DD", "nama": "isi nama hari libur" } ]
+}

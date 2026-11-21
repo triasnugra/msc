@@ -1,0 +1,13 @@
+{
+  "_catatan": "Klaim dokumen mesin untuk pemeriksaan 'versi config tidak sesuai klaim' (6.D/6.F). Diisi hanya dari dokumen yang dibaca.",
+  "scv5": {
+    "sumber": "UPGRADE_1.2.md baris 8, 22-24, 29",
+    "versi": "1.2-ElizStrict",
+    "kunciConfig": {
+      "ban_mid_range": true,
+      "require_retest": true,
+      "mid_range_penalty": 4
+    },
+    "kodeDiklaim": "scalp/engine.py meneruskan cfg ke choose_signals"
+  }
+}

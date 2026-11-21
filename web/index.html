@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Monitor MSC</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Monitor MSC <span id="versi" class="kecil"></span></h1>
+  <span id="lencana" class="badge"></span>
+  <button id="btnLaporan" title="Salin laporan teks untuk Claude">Salin laporan untuk Claude</button>
+  <a id="unduh" href="laporan.txt" download="laporan-msc.txt"><button>Unduh laporan</button></a>
+  <button id="btnTema">Tema</button>
+</header>
+<main>
+  <div id="banner"></div>
+  <div id="event" class="event">Memuat...</div>
+  <div id="konteks"></div>
+  <nav class="tabs" id="tabs"></nav>
+  <section id="isi"></section>
+</main>
+<footer id="kaki"></footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>

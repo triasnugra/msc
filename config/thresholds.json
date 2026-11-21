@@ -1,0 +1,204 @@
+{
+  "_catatan": "SEMUA ambang di sini adalah HIPOTESIS awal (bukan hasil optimasi). Mengubah nilai yang dipakai definisi/flag = epoch baru (lihat definitions.json, DOC-25).",
+  "statistik": {
+    "minSampelBermakna": 30,
+    "wilsonZ": 1.96,
+    "ciZ": 1.96,
+    "ciMinN": 30,
+    "klasterJendelaMenit": 60,
+    "kualitasBurukFraksi": 0.5,
+    "panelKegagalanJumlah": 5,
+    "distribusiR": [
+      -2,
+      -1.5,
+      -1,
+      -0.5,
+      0,
+      0.5,
+      1,
+      2,
+      3
+    ]
+  },
+  "keputusan": {
+    "terlambatR": 0.5,
+    "layakJarakMaksR": 0.3,
+    "tungguJarakR": 1.0,
+    "layakUsiaMaksFraksi": 0.5,
+    "flagKeras": [
+      "STOP_SANGAT_LEBAR",
+      "RR_TP1_RENDAH",
+      "LIKUIDITAS_EKSTREM_RENDAH",
+      "EVENT_SANGAT_DEKAT"
+    ],
+    "flagLunak": [
+      "MID_RANGE",
+      "LAWAN_TREN",
+      "RISIKO_SQUEEZE_SHORT",
+      "JENDELA_VOLUME_RENDAH",
+      "COOLDOWN_PASCA_SHOCK",
+      "EVENT_DEKAT",
+      "PENUTUPAN_PERIODE",
+      "LAWAN_TREN_HTF",
+      "STOP_LEBAR",
+      "LIKUIDITAS_RENDAH",
+      "OVERTRADING"
+    ],
+    "flagAnotasi": [
+      "KONFLUENSI_FIB",
+      "VOLUME_KONFIRMASI",
+      "VOLUME_LEMAH",
+      "OBV_DIVERGENSI_BULL",
+      "OBV_DIVERGENSI_BEAR",
+      "OBV_V",
+      "OBV_TIDAK_ANDAL",
+      "FVG_DEKAT",
+      "THREE_TAP",
+      "TANPA_KONFIRMASI",
+      "LEVERAGE_TINGGI",
+      "NON_MAJOR_ASING",
+      "BTC_TENGAH_RANGE",
+      "TIDAK_TERPETAKAN"
+    ]
+  },
+  "doktrin": {
+    "DOC-01": {
+      "rangeCandles1h": 48,
+      "zonaTengahPct": [
+        30,
+        70
+      ]
+    },
+    "DOC-03": {
+      "terlambatR": 0.5
+    },
+    "DOC-04": {
+      "stopLebarPct": 2.0,
+      "stopSangatLebarPct": 5.0
+    },
+    "DOC-05": {
+      "rrTp1RendahDi": 1.2
+    },
+    "DOC-06": {
+      "emaCepat": 20,
+      "emaLambat": 50,
+      "atrPeriode": 14,
+      "squeezeAtrMultDariLow30h": 1.0,
+      "low30hHari": 30,
+      "swingPivotN": 3
+    },
+    "DOC-07": {
+      "btcTengahRangePct": [
+        30,
+        70
+      ]
+    },
+    "DOC-08": {
+      "likuiditasRendahUsdt": 20000000,
+      "likuiditasEkstremRendahUsdt": 10000000,
+      "topNMajor": 25
+    },
+    "DOC-10": {
+      "eventDekatJam": 24,
+      "eventSangatDekatMenit": 60,
+      "sesiUtc": {
+        "asia": [
+          0,
+          8
+        ],
+        "eropa": [
+          8,
+          16
+        ],
+        "as": [
+          16,
+          24
+        ]
+      },
+      "akhirPekanUtc": [
+        6,
+        0
+      ]
+    },
+    "DOC-11": {
+      "maksPerJamPerMesin": 2,
+      "maksPerJamGabungan": 4,
+      "klasterSamaArahMin": 4,
+      "klasterJendelaMenit": 60
+    },
+    "DOC-12": {
+      "geserHarianBtcPct": 6,
+      "atrJamMultMedian": 2,
+      "medianHari": 7,
+      "cooldownJam": 24
+    },
+    "DOC-13": {
+      "minNUntukNotif": 30,
+      "tp1ClosePctHipotesisMin": 50
+    },
+    "DOC-14": {
+      "levTinggiDi": 5
+    },
+    "DOC-15": {
+      "fibLevel": [
+        0.75,
+        0.786
+      ],
+      "atrMult": 0.3,
+      "jendelaImpulsCandle1h": 48
+    },
+    "DOC-16": {
+      "persenSatuArah": 85,
+      "persenHasilPositif": 85,
+      "minN": 30
+    },
+    "DOC-19": {
+      "volumeRataCandle": 20,
+      "volumeKonfirmasiRasio": 1.5,
+      "candlePemicu": "candle 1H sudah close terakhir sebelum waktu acuan (pendekatan)"
+    },
+    "DOC-20": {
+      "penutupanPeriodeJam": 12
+    },
+    "DOC-21": {
+      "lookbackCandle": 30,
+      "tfPakai": [
+        "1h",
+        "4h"
+      ],
+      "jendelaDivergensi": 30,
+      "obvVTroughTerakhirCandle": 12,
+      "obvVPulihFraksi": 0.5
+    },
+    "DOC-22": {
+      "threeTapToleransiAtr": 0.3,
+      "threeTapMaksCandle1h": 48,
+      "fvgDekatAtr": 0.3,
+      "fvgTf": [
+        "1h",
+        "4h"
+      ],
+      "threeTapEntryDekatAtr": 1.0
+    }
+  },
+  "notifikasi": {
+    "tidakTerisiPersenMaks": 30,
+    "rrMedianVsTp1Rasio": 2.0,
+    "konsentrasiTop3Persen": 50,
+    "ddTerhadapTotalRasio": 0.5,
+    "satuArahPersen": 85,
+    "minNStatistik": 30,
+    "tingkatAwalDoktrin": "SEDANG",
+    "ringkasanHarianJamWib": 7,
+    "doktrinPersenMin": 20,
+    "doktrinMinBerFlag": 3,
+    "fillRateRendahPersen": 50,
+    "pushMinTingkat": "SEDANG",
+    "pushMaksPerRun": 8,
+    "rrMinPasang": 3
+  },
+  "anomali": {
+    "penutupanMassalMinSinyal": 2,
+    "celahUpdateToleransiKali": 2
+  }
+}

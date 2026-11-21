@@ -1,0 +1,354 @@
+{
+  "versi": "2.0.0",
+  "zonaWaktu": {
+    "tampil": "Asia/Jakarta",
+    "offsetJam": 7
+  },
+  "biaya": {
+    "costPctDefault": 0.2,
+    "catatan": "Biaya pulang-pergi dalam persen harga. Dipakai HANYA untuk mesin dengan rSudahNet=false (sc, scv6). R_bersih = R_mesin - (costPct / stopPct)."
+  },
+  "sumber": {
+    "asumsiNamaRepo": true,
+    "baseUrlPages": "https://triasnugra.github.io",
+    "rawBase": "https://raw.githubusercontent.com/triasnugra",
+    "tokenEnv": "MONITOR_TOKEN",
+    "timeoutMs": 15000,
+    "retry": {
+      "maks": 3,
+      "backoffMs": [
+        1000,
+        3000,
+        7000
+      ]
+    }
+  },
+  "harga": {
+    "timeoutMs": 10000,
+    "retry": {
+      "maks": 2,
+      "backoffMs": [
+        1000,
+        3000
+      ]
+    },
+    "providers": [
+      {
+        "id": "binance_vision",
+        "base": "https://data-api.binance.vision",
+        "klines": "/api/v3/klines",
+        "ticker24h": "/api/v3/ticker/24hr",
+        "tickerPrice": "/api/v3/ticker/price"
+      },
+      {
+        "id": "bybit",
+        "base": "https://api.bybit.com",
+        "klines": "/v5/market/kline",
+        "ticker24h": "/v5/market/tickers",
+        "kategori": "spot"
+      },
+      {
+        "id": "okx",
+        "base": "https://www.okx.com",
+        "klines": "/api/v5/market/candles",
+        "ticker24h": "/api/v5/market/tickers",
+        "instType": "SPOT"
+      }
+    ],
+    "overrideSimbol": {},
+    "quote": "USDT",
+    "candleDibutuhkan": {
+      "15m": 100,
+      "1h": 300,
+      "4h": 300,
+      "1d": 400,
+      "1w": 120
+    },
+    "maksRequestPerRun": 150,
+    "maksCandleOkx": 300,
+    "catatan": "Simbol yang sama dipakai di semua penyedia (BASEUSDT). Tidak ada override: contoh 1000PEPEUSDT di Bybit adalah kontrak perpetual berskala x1000, bukan spot.",
+    "maksKoinPerRun": 12,
+    "tfKoin": {
+      "15m": 100,
+      "1h": 300,
+      "4h": 120,
+      "1d": 60
+    }
+  },
+  "arsip": {
+    "dir": "data/archive",
+    "formatBaris": "jsonl",
+    "appendOnly": true,
+    "kunciDedup": [
+      "mesin",
+      "id",
+      "versi"
+    ],
+    "keputusanFile": "data/archive/keputusan.jsonl",
+    "notifStateFile": "data/state/notif.json",
+    "dedupPushFile": "data/state/push.json",
+    "tampilBarisMaks": 400
+  },
+  "basi": {
+    "toleransiKali": 2,
+    "bannerJikaDataTuaMenit": 90
+  },
+  "kesiapanDefaultMonitor": {
+    "label": "DEFAULT MONITOR (bukan dari mesin)",
+    "minTrades": 150,
+    "minMinggu": 20,
+    "ciBawahHarusPositif": true,
+    "minPF": 1.2,
+    "minSQN": null
+  },
+  "mesin": [
+    {
+      "id": "sc",
+      "nama": "sc (scalp, Node)",
+      "runtime": "node",
+      "repo": "sc",
+      "aktif": true,
+      "kadensiMenit": 15,
+      "kadensiStatus": "TERVERIFIKASI (.github/workflows/scan.yml cron */15)",
+      "batalSetelahMenit": 60,
+      "batalStatus": "TERVERIFIKASI (config.json fillBars=12 x 5m; scripts/../trade-sim.mjs gradeTrade)",
+      "holdMaksMenit": 240,
+      "jurnal": {
+        "format": "array_datar",
+        "pages": [
+          "data/journal.json"
+        ],
+        "raw": [
+          {
+            "path": "data/journal.json",
+            "ref": "main"
+          }
+        ]
+      },
+      "rSudahNet": false,
+      "rSudahNetBukti": "scripts/scan.mjs baris 25: net=r=>R-(costPct/100)/(|entry-sl|/entry); journal.R = kotor (SL=-1, TP=1,8)",
+      "pemotongan": {
+        "batas": null,
+        "bukti": "scripts/scan.mjs menulis seluruh array J; tidak ada slice"
+      },
+      "biayaPct": 0.2,
+      "kesiapan": {
+        "sumber": "README.md bagian 'Syarat sebelum uang sungguhan (usulan)', BUKAN config",
+        "minTrades": 200,
+        "minMinggu": 8,
+        "ciBawahHarusPositif": true,
+        "minPF": 1.2,
+        "minSQN": 2
+      },
+      "mode": "SCALP"
+    },
+    {
+      "id": "scv2",
+      "nama": "scv2 (Gate 0-9, Python)",
+      "runtime": "python",
+      "repo": "scv2",
+      "aktif": true,
+      "kadensiMenit": 5,
+      "kadensiStatus": "TERVERIFIKASI (scan.yml cron */5, best-effort)",
+      "batalSetelahMenit": 120,
+      "batalStatus": "TERVERIFIKASI (config/config.yaml sim.entry_expiry_bars=24 x 5m)",
+      "holdMaksMenit": 360,
+      "jurnal": {
+        "format": "array_datar",
+        "pages": [
+          "data/journal.json"
+        ],
+        "raw": [
+          {
+            "path": "journal.json",
+            "ref": "data"
+          }
+        ]
+      },
+      "rSudahNet": true,
+      "rSudahNetBukti": "scalp/sim.py done(): r=(gross-cost_pct)/(stop_pct+cost_pct)",
+      "pemotongan": {
+        "batas": 500,
+        "bukti": "scripts/run_scan.py baris 68: journal=journal[-500:]"
+      },
+      "biayaPct": null,
+      "kesiapan": {
+        "sumber": "TIDAK DIDEFINISIKAN di kode/config scv2",
+        "minTrades": null,
+        "minMinggu": null,
+        "ciBawahHarusPositif": null,
+        "minPF": null,
+        "minSQN": null
+      },
+      "mode": "SCALP"
+    },
+    {
+      "id": "scv4",
+      "nama": "scv4 (Gate 0-9, Python, riwayat di Pages)",
+      "runtime": "python",
+      "repo": "scv4",
+      "aktif": true,
+      "kadensiMenit": 15,
+      "kadensiStatus": "TERVERIFIKASI (.github/workflows/analyze.yml cron */15)",
+      "batalSetelahMenit": 360,
+      "batalStatus": "TIDAK ADA masa order di kode (tidak ada verifikasi fill); 360 menit = time_stop_hours=6 (config.yaml risk.time_stop_hours) dipakai sebagai batas usia sinyal",
+      "holdMaksMenit": 360,
+      "jurnal": {
+        "format": "objek_signals",
+        "pages": [
+          "history.json"
+        ],
+        "raw": []
+      },
+      "rSudahNet": true,
+      "rSudahNetBukti": "scalp/risk.py simulate_trade(): SL = -1 - cost_r; TP = realized - cost_r; cost_pct=2*(fee_bps+slippage_bps)/10000=0,16%",
+      "pemotongan": {
+        "batas": 300,
+        "bukti": "scalp/tracker.py save_history: signals[-max_signals:], config.yaml history.max_signals=300"
+      },
+      "biayaPct": 0.16,
+      "kesiapan": {
+        "sumber": "TIDAK DIDEFINISIKAN di kode/config scv4",
+        "minTrades": null,
+        "minMinggu": null,
+        "ciBawahHarusPositif": null,
+        "minPF": null,
+        "minSQN": null
+      },
+      "mode": "SCALP"
+    },
+    {
+      "id": "scv5",
+      "nama": "scv5 (hash-chain, Python)",
+      "runtime": "python",
+      "repo": "scv5",
+      "aktif": true,
+      "kadensiMenit": 15,
+      "kadensiStatus": "TERVERIFIKASI (.github/workflows/deploy.yml cron */15)",
+      "batalSetelahMenit": 180,
+      "batalStatus": "TERVERIFIKASI (config/strategy.json sim.expiry_min=180)",
+      "holdMaksMenit": 1440,
+      "jurnal": {
+        "format": "event_hashchain",
+        "pages": [],
+        "raw": [
+          {
+            "path": "data/journal.jsonl",
+            "ref": "main"
+          }
+        ]
+      },
+      "rSudahNet": true,
+      "rSudahNetBukti": "scalp/journal.py simulate(): close() menulis r_gross dan r_net=r_gross-cost_r",
+      "pemotongan": {
+        "batas": null,
+        "bukti": "journal.jsonl append-only (Journal.append)"
+      },
+      "biayaPct": 0.1,
+      "kesiapan": {
+        "sumber": "config/strategy.json protocol",
+        "minTrades": 150,
+        "minMinggu": 20,
+        "ciBawahHarusPositif": true,
+        "minPF": 1.3,
+        "minSQN": 1.6
+      },
+      "mode": "SCALP"
+    },
+    {
+      "id": "scv6",
+      "nama": "scv6 (Real-Money, Node)",
+      "runtime": "node",
+      "repo": "scv6",
+      "aktif": true,
+      "kadensiMenit": 15,
+      "kadensiStatus": "TERVERIFIKASI (.github/workflows/deploy.yml cron */15)",
+      "batalSetelahMenit": 720,
+      "batalStatus": "TERVERIFIKASI (src/config.mjs risk.signalExpiryHours=12)",
+      "holdMaksMenit": null,
+      "jurnal": {
+        "format": "objek_bersarang",
+        "pages": [],
+        "raw": [
+          {
+            "path": "data/journal.json",
+            "ref": "main"
+          }
+        ]
+      },
+      "rSudahNet": false,
+      "rSudahNetBukti": "src/forward-tracker.mjs: realizedR hardcode 0,9 / -1 / 0,6*1,5+0,4*rewardR tanpa biaya",
+      "pemotongan": {
+        "batas": 100,
+        "bukti": "src/forward-tracker.mjs baris 152-153: activeSignals.slice(0,20), closedSignals.slice(0,100)"
+      },
+      "biayaPct": 0.2,
+      "kesiapan": {
+        "sumber": "TIDAK DIDEFINISIKAN di kode/config scv6",
+        "minTrades": null,
+        "minMinggu": null,
+        "ciBawahHarusPositif": null,
+        "minPF": null,
+        "minSQN": null
+      },
+      "mode": "SCALP"
+    },
+    {
+      "id": "sctn",
+      "nama": "sctn (forward test + backtest, Python)",
+      "runtime": "python",
+      "repo": "sctn",
+      "aktif": true,
+      "kadensiMenit": 60,
+      "kadensiStatus": "TERVERIFIKASI (run-analysis.yml cron '5 * * * *')",
+      "batalSetelahMenit": 1440,
+      "batalStatus": "TERVERIFIKASI (config/risk.yaml evaluation.pending_expiry_hours=24)",
+      "holdMaksMenit": 4320,
+      "jurnal": {
+        "format": "csv_dan_json",
+        "pages": [
+          "data/forward_test.json",
+          "data/signal_log.csv",
+          "data/backtest/summary.json",
+          "data/backtest/trades.csv"
+        ],
+        "raw": [
+          {
+            "path": "output/forward_test.json",
+            "ref": "main"
+          },
+          {
+            "path": "output/signal_log.csv",
+            "ref": "main"
+          },
+          {
+            "path": "output/backtest/summary.json",
+            "ref": "main"
+          },
+          {
+            "path": "output/backtest/trades.csv",
+            "ref": "main"
+          }
+        ]
+      },
+      "rSudahNet": true,
+      "rSudahNetBukti": "src/evaluate/simulator.py baris 25 dan 38: cost=fee_pct_roundtrip/stop_pct; r=round(r-cost,4)",
+      "pemotongan": {
+        "batas": null,
+        "bukti": "tidak ada pemotongan yang ditemukan (belum dicek menyeluruh: TIDAK TERVERIFIKASI untuk signal_log.csv)"
+      },
+      "biayaPct": 0.1,
+      "kesiapan": {
+        "sumber": "config/risk.yaml evaluation + backtest summary readiness",
+        "minTrades": 150,
+        "minMinggu": 20,
+        "ciBawahHarusPositif": true,
+        "minPF": 1.2,
+        "minSQN": null
+      },
+      "mode": "SCALP"
+    }
+  ],
+  "modeSpotHashes": [],
+  "_catatanModeSpot": "Isi dengan strategy_hash profil SPOT (mesin yang melarang short dan tanpa leverage, mis. scv5 strategy.spot). Sinyal dengan hash itu ditandai MODE=SPOT dan dikeluarkan dari statistik scalp (DOC-24). Monitor tidak dapat mendeteksi mode SPOT otomatis dari jurnal."
+}

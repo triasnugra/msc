@@ -1,0 +1,606 @@
+{
+  "_catatan": "Seed backlog. Bukti = file dan baris dari pembacaan kode. Item jenis PERTANYAAN-VERIFIKASI wajib dinaikkan/dikoreksi/dihapus dengan bukti. Status diubah lewat data/state/notif.json.",
+  "versi": 1,
+  "items": [
+    {
+      "id": "SC-01",
+      "mesin": "sc",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Ekspektasi bersih negatif di backtest sendiri",
+      "bukti": "data/backtest.md baris 3: n=270, win 25%, R/trade -0,167, PF 0,74 (biaya 0,2%); baris 10: biaya 0,1% tetap negatif (-0,077, PF 0,87)",
+      "dampak": "Mesin kalah secara statistik pada backtest; tidak ada bukti edge untuk uang nyata",
+      "tindakan": "Jangan setel parameter ke data terbaru. Rancang hipotesis baru, uji out-of-sample, mulai epoch baru bila core berubah",
+      "doc": [
+        "DOC-17"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SC-02",
+      "mesin": "sc",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Universe top-25 volume tanpa daftar putih (SOXLB, GRAM masuk)",
+      "bukti": "scripts/net.mjs baris 7 (universe = top-n volume USDT tanpa filter selain stablecoin dan leveraged token); data/journal.json memuat SOXLB dan GRAM",
+      "dampak": "Koin tipis/asing mudah dimanipulasi; indikator volume tak andal",
+      "tindakan": "Tambahkan daftar putih majors atau ambang likuiditas minimum; catat sebagai perubahan versi baru",
+      "doc": [
+        "DOC-08"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SC-03",
+      "mesin": "sc",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Sisi LONG sangat lemah di backtest (PF 0,46)",
+      "bukti": "data/backtest.md baris 4: LONG n=100 win 15% R/trade -0,389 PF 0,46; SHORT PF 0,94 (baris 5)",
+      "dampak": "Satu arah merusak hasil gabungan; tren menentukan sisi",
+      "tindakan": "Uji filter arah searah tren HTF (DOC-06) sebagai hipotesis baru dengan out-of-sample",
+      "doc": [
+        "DOC-06",
+        "DOC-16"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SC-04",
+      "mesin": "sc",
+      "tingkat": "INFO",
+      "jenis": "PERTANYAAN-VERIFIKASI",
+      "judul": "Apakah ada larangan mid-range dan konfirmasi close untuk semua setup?",
+      "bukti": "Sweep: core.mjs baris 35-36 mensyaratkan close kembali ke dalam. Pullback EMA20 (baris 38-39) bukan trigger baku DOC-02. Larangan mid-range tidak ditemukan",
+      "dampak": "Setup pullback tidak terpetakan; mid-range tidak dicegah di mesin",
+      "tindakan": "Baca core.mjs sepenuhnya lalu naikkan, koreksi, atau hapus item ini dengan bukti baris",
+      "doc": [
+        "DOC-01",
+        "DOC-02"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV2-01",
+      "mesin": "scv2",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "events.yaml hanya satu FOMC bertanda \"verifikasi tanggal\"; CPI tidak ada",
+      "bukti": "config/events.yaml baris 7: FOMC 2026-12-09T19:00:00Z (= 14:00 New York, EST, konsisten); CPI tidak ada",
+      "dampak": "Entry bisa terbit menjelang CPI tanpa blackout",
+      "tindakan": "Isi events dari sumber resmi (federalreserve.gov, bls.gov); verifikasi tanggal",
+      "doc": [
+        "DOC-10",
+        "DOC-20"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV2-02",
+      "mesin": "scv2",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Jurnal dipotong ke 500 baris terakhir",
+      "bukti": "scripts/run_scan.py baris 68: journal = journal[-500:]",
+      "dampak": "Riwayat lama hilang di mesin; statistik dari jurnal mesin tidak lengkap",
+      "tindakan": "Andalkan arsip monitor (append-only); usulkan arsip append-only di mesin",
+      "doc": [
+        "DOC-17",
+        "DOC-26"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV2-03",
+      "mesin": "scv2",
+      "tingkat": "INFO",
+      "jenis": "TEMUAN",
+      "judul": "Kriteria kelayakan uang nyata tidak didefinisikan di kode/config",
+      "bukti": "Tidak ditemukan ambang trade/minggu/CI/PF di config/config.yaml atau README",
+      "dampak": "Monitor memakai pembanding DEFAULT MONITOR, tidak pernah menyatakan layak",
+      "tindakan": "Definisikan protokol pra-registrasi di config mesin",
+      "doc": [
+        "DOC-25"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV2-04",
+      "mesin": "scv2",
+      "tingkat": "INFO",
+      "jenis": "PERTANYAAN-VERIFIKASI",
+      "judul": "Performa scv2 tidak diketahui; pemetaan T4 belum dibuktikan",
+      "bukti": "Tidak ada jurnal/backtest di unggahan; scalp/triggers/t4_flip.py baru dibaca docstring",
+      "dampak": "Statistik kosong sampai jurnal tersedia",
+      "tindakan": "Unggah journal.json atau tunggu arsip monitor; baca t4_flip.py untuk memetakan LEVEL_FLIP/TRENDLINE",
+      "doc": [
+        "DOC-02"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV4-01",
+      "mesin": "scv4",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Riwayat hilang diam-diam bila unduhan history.json gagal",
+      "bukti": ".github/workflows/analyze.yml baris 50-53: curl ... || echo '{\"signals\": []}' > site/history.json",
+      "dampak": "Satu kegagalan jaringan menghapus seluruh riwayat sinyal scv4 tanpa error",
+      "tindakan": "Gagalkan run bila unduhan gagal atau commit riwayat ke repo; monitor menyimpan arsip sendiri",
+      "doc": [
+        "DOC-17",
+        "DOC-26"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV4-02",
+      "mesin": "scv4",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Fill entry tidak diverifikasi; sinyal langsung dianggap terisi",
+      "bukti": "scalp/risk.py simulate_trade (baris 149): penilaian mulai dari waktu sinyal tanpa cek harga menyentuh entry; tidak ada masa order",
+      "dampak": "R terlalu optimistis untuk entry limit yang tidak terisi",
+      "tindakan": "Tambahkan verifikasi fill dan masa order sebelum menilai TP/SL",
+      "doc": [
+        "DOC-03"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV4-03",
+      "mesin": "scv4",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Riwayat dipotong 300 sinyal terakhir",
+      "bukti": "scalp/tracker.py save_history baris 30: signals[-max_signals:]; config.yaml history.max_signals=300",
+      "dampak": "Riwayat lama hilang",
+      "tindakan": "Naikkan batas atau arsipkan; monitor mengarsipkan sendiri",
+      "doc": [
+        "DOC-26"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV4-04",
+      "mesin": "scv4",
+      "tingkat": "INFO",
+      "jenis": "TEMUAN",
+      "judul": "Status INVALID tidak pernah ditutup",
+      "bukti": "scalp/tracker.py: INVALID bukan status terbuka dan closed_at=None sehingga terhitung open di ringkasan",
+      "dampak": "Statistik open tidak akurat",
+      "tindakan": "Beri closed_at atau status final",
+      "doc": [],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV4-05",
+      "mesin": "scv4",
+      "tingkat": "INFO",
+      "jenis": "PERTANYAAN-VERIFIKASI",
+      "judul": "Events/blackout, klaim dokumen vs config, kepatuhan DOC-02/04/05/14",
+      "bukti": "Belum dibuktikan: pencarian blackout/events, perbandingan README vs config.yaml, flag per sinyal. Mid-range sudah ada (scalp/engine.py baris 103-111)",
+      "dampak": "Tidak ada bukti sampai dibaca tuntas",
+      "tindakan": "Baca kode lalu naikkan/koreksi/hapus dengan bukti baris",
+      "doc": [
+        "DOC-01",
+        "DOC-02",
+        "DOC-04",
+        "DOC-05",
+        "DOC-14"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV5-01",
+      "mesin": "scv5",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Upgrade 1.2-ElizStrict terpasang setengah",
+      "bukti": "UPGRADE_1.2.md baris 8, 22-24 mengklaim 1.2-ElizStrict dengan ban_mid_range, require_retest, mid_range_penalty; config/strategy.json masih strategy_version \"1.1\"; ketiga kunci tidak ada di kode/config",
+      "dampak": "Klaim dokumen tidak sesuai perilaku mesin",
+      "tindakan": "Selesaikan upgrade atau koreksi dokumen; mulai epoch baru bila core berubah",
+      "doc": [
+        "DOC-01"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV5-02",
+      "mesin": "scv5",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "cfg tidak diteruskan ke choose_signals",
+      "bukti": "scalp/engine.py baris 132 memanggil choose_signals(...) tanpa cfg; scalp/signals.py baris 15 menerima cfg=None; prefer_majors (signals.py baris 19, 34) tidak pernah aktif",
+      "dampak": "Aturan majors tidak berlaku",
+      "tindakan": "Teruskan cfg; versi baru",
+      "doc": [
+        "DOC-08"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV5-03",
+      "mesin": "scv5",
+      "tingkat": "INFO",
+      "jenis": "TEMUAN",
+      "judul": "Dua epoch strategy_hash di jurnal",
+      "bukti": "Sinyal ETH: versi 1.0 hash 7da00c...; dua sinyal HBAR: versi 1.1 hash 56a711...",
+      "dampak": "Statistik tidak boleh dicampur",
+      "tindakan": "Monitor menghitung per strategy_hash",
+      "doc": [
+        "DOC-25"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV5-04",
+      "mesin": "scv5",
+      "tingkat": "INFO",
+      "jenis": "TEMUAN",
+      "judul": "state.json dan market.json di repo basi",
+      "bukti": "Workflow deploy.yml hanya meng-commit journal.jsonl dan brief.json; data/state.json bertanggal 17 Nov di unggahan",
+      "dampak": "Monitor tidak memakai file itu; replay jurnal dipakai",
+      "tindakan": "Tidak ada tindakan di mesin",
+      "doc": [],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV5-05",
+      "mesin": "scv5",
+      "tingkat": "INFO",
+      "jenis": "PERTANYAAN-VERIFIKASI",
+      "judul": "Review AI mati; brief.json dan backtest.json tidak ada di unggahan",
+      "bukti": "Klaim prompt: ai.verdict \"N/A\". Tidak dapat diverifikasi dari unggahan",
+      "dampak": "TIDAK TERVERIFIKASI",
+      "tindakan": "Unggah brief.json/backtest.json bila ingin diaudit",
+      "doc": [],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-01",
+      "mesin": "scv6",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "rr dihitung ke TP2, bukan TP1",
+      "bukti": "src/eliz-scalp-engine.mjs baris 108/157/195/233: (tp2 - currentPrice)/risk, dipakai pengurut kandidat; contoh SOL SHORT: rr 13,8 vs R ke TP1 sekitar 2,4",
+      "dampak": "Gerbang minRR tidak menyaring; peringkat menyesatkan",
+      "tindakan": "Hitung rr ke TP1 dari harga nyata",
+      "doc": [
+        "DOC-05"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-02",
+      "mesin": "scv6",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Fill tidak diverifikasi dan zona entry terbalik",
+      "bukti": "src/forward-tracker.mjs tidak memeriksa entry terisi; data/journal.json: 4 zona terbalik (HBAR-LONG-1795108684157 0,05481>0,05468; SUI, ARB, TRB aktif)",
+      "dampak": "Hasil dan jarak entry tidak dapat diandalkan",
+      "tindakan": "Normalisasi zona dan verifikasi fill",
+      "doc": [
+        "DOC-03"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-03",
+      "mesin": "scv6",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "realizedR di-hardcode tanpa biaya",
+      "bukti": "src/forward-tracker.mjs baris 52, 63, 80, 91, 109: 0,9 untuk TP1+BE, 0,6x1,5+0,4xrewardR untuk TP2, -1 untuk SL",
+      "dampak": "R tidak mencerminkan hasil nyata; SOL SHORT dicatat 0,9R padahal TP1 sekitar 2,4R",
+      "tindakan": "Hitung R dari harga exit dan biaya",
+      "doc": [
+        "DOC-13"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-04",
+      "mesin": "scv6",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Pelacakan hanya candle terakhir + harga; penutupan massal setelah celah",
+      "bukti": "data/journal.json: SOL dan HBAR sama-sama closedAt 2026-11-19T23:43:02.545Z",
+      "dampak": "Hit TP/SL pada run terlewat hilang; waktu hasil = jam run",
+      "tindakan": "Telusuri candle sejak sinyal",
+      "doc": [
+        "DOC-26"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-05",
+      "mesin": "scv6",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "TP dicek sebelum SL dalam candle yang sama; SL pindah ke BE di candle yang sama",
+      "bukti": "src/forward-tracker.mjs: urutan pengecekan TP1/TP2 sebelum SL dan currentSl=entryMid setelah tp1Hit",
+      "dampak": "Bias optimistis",
+      "tindakan": "Perlakukan SL lebih dulu pada candle ambigu",
+      "doc": [],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-06",
+      "mesin": "scv6",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Candle 15m trigger tidak difilter sudah close",
+      "bukti": "src/eliz-scalp-engine.mjs baris 68: hanya c1h.slice(0,-1) membuang candle 1H berjalan",
+      "dampak": "Potensi repaint",
+      "tindakan": "Pakai candle close saja",
+      "doc": [
+        "DOC-02"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-07",
+      "mesin": "scv6",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Rezim BEARISH_PRESSURE tetapi 6 sinyal aktif semuanya LONG alt",
+      "bukti": "data/signals.json: regime BEARISH_PRESSURE, altcoinBias SHORT_SCALP_FAVORED; src/gate.mjs baris 53: LIQUIDITY_SWEEP_RECLAIM dikecualikan dari blok BTC headwind",
+      "dampak": "Lawan tren dan sinyal berkorelasi",
+      "tindakan": "Tinjau pengecualian headwind dan batas sinyal searah",
+      "doc": [
+        "DOC-06",
+        "DOC-11"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-08",
+      "mesin": "scv6",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Validasi AI palsu bila tanpa API key",
+      "bukti": "src/gemini-ai-analyst.mjs baris 34-37: aiVerdict \"EXECUTE\" dengan teks \"Tervalidasi otomatis\"",
+      "dampak": "Label validasi menyesatkan",
+      "tindakan": "Ganti dengan label \"tanpa review AI\"",
+      "doc": [],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-09",
+      "mesin": "scv6",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Workflow menelan kegagalan; jurnal dipotong",
+      "bukti": ".github/workflows/deploy.yml baris 42 continue-on-error, baris 54-56 push dilewati; src/forward-tracker.mjs baris 152-153: active 20, closed 100",
+      "dampak": "Data basi bisa terbit; statistik hanya 100 terakhir",
+      "tindakan": "Gagalkan run saat commit gagal; arsipkan",
+      "doc": [
+        "DOC-26"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SV6-10",
+      "mesin": "scv6",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Leverage disarankan sampai 20x",
+      "bukti": "src/gate.mjs baris 73: Math.min(20, ...)",
+      "dampak": "Bertentangan dengan leverage rendah untuk alt",
+      "tindakan": "Batasi leverage; hanya 2 trade selesai (net -0,1R) sehingga belum ada bukti",
+      "doc": [
+        "DOC-14"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SCTN-01",
+      "mesin": "sctn",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Hasil bergantung pada SHORT di rezim bearish",
+      "bukti": "output/backtest/trades.csv: SHORT 257 vs LONG 25 trade selesai; prompt: PF SHORT 1,33 vs LONG 0,49",
+      "dampak": "Hasil tidak umum; rezim berubah = hasil berubah",
+      "tindakan": "Uji lintas rezim; jangan klaim edge dua arah",
+      "doc": [
+        "DOC-16"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SCTN-02",
+      "mesin": "sctn",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "CI95 rata-rata R mencakup nol",
+      "bukti": "output/backtest/summary.json: ci_low -0,0517, ci_high +0,3728, n=282, 6,3 dari 20 minggu",
+      "dampak": "Belum terbukti berbeda dari nol",
+      "tindakan": "Kumpulkan sampel hingga 150 trade dan 20 minggu forward",
+      "doc": [
+        "DOC-17"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SCTN-03",
+      "mesin": "sctn",
+      "tingkat": "TINGGI",
+      "jenis": "TEMUAN",
+      "judul": "Fill instan untuk status ENTRY ZONE",
+      "bukti": "src/evaluate/simulator.py baris 33-34; 152 dari 282 trade backtest selesai berstatus ENTRY ZONE; contoh forward AXS R -0,1148 seketika",
+      "dampak": "Hasil optimistis atau pesimistis tanpa dasar fill nyata",
+      "tindakan": "Verifikasi fill lewat candle",
+      "doc": [
+        "DOC-03"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SCTN-04",
+      "mesin": "sctn",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Stop dapat sampai 6% dan dilebarkan ke minimal 0,7%",
+      "bukti": "config/risk.yaml baris 10 max_stop_pct 6,0 dan baris 12 min_stop_pct_floor 0,7",
+      "dampak": "Stop terlalu lebar untuk scalping",
+      "tindakan": "Turunkan max_stop_pct sebagai hipotesis baru",
+      "doc": [
+        "DOC-04"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SCTN-05",
+      "mesin": "sctn",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "event_blackouts kosong",
+      "bukti": "config/risk.yaml baris 47: event_blackouts: []",
+      "dampak": "Tidak ada blackout FOMC/CPI",
+      "tindakan": "Isi dari sumber resmi",
+      "doc": [
+        "DOC-10",
+        "DOC-20"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SCTN-06",
+      "mesin": "sctn",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Data basi bisa terbit",
+      "bukti": ".github/workflows/run-analysis.yml baris 70 continue-on-error; baris 74, 78, 83 if: always(); commit jurnal gagal hanya peringatan",
+      "dampak": "Pages menampilkan data lama tanpa tanda",
+      "tindakan": "Gagalkan atau beri banner",
+      "doc": [
+        "DOC-26"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "SCTN-07",
+      "mesin": "sctn",
+      "tingkat": "INFO",
+      "jenis": "TEMUAN",
+      "judul": "Drawdown maksimum sctn diurutkan menurut waktu sinyal",
+      "bukti": "Ringkasan mesin 40,05R; diurutkan menurut waktu selesai oleh monitor = 46,97R (tests/adapters.test.mjs)",
+      "dampak": "Drawdown mesin terlalu kecil sekitar 17%",
+      "tindakan": "Urutkan menurut waktu selesai",
+      "doc": [],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "X-01",
+      "mesin": "LINTAS",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Aturan simulasi berbeda antar mesin; R tidak sepenuhnya sebanding",
+      "bukti": "Fill: sctn instan, scv4/scv6 tanpa verifikasi, scv5/sc/scv2 diverifikasi; biaya: sc/scv6 kotor, lainnya net; TP1 parsial: scv2 60%, scv6 hardcode",
+      "dampak": "Perbandingan R antar mesin menyesatkan",
+      "tindakan": "Baca setiap angka bersama label kualitas data",
+      "doc": [
+        "DOC-26"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "X-02",
+      "mesin": "LINTAS",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Sinyal berkorelasi (6 LONG alt serentak di scv6)",
+      "bukti": "data/journal.json scv6: 6 sinyal aktif LONG pada dua kelompok waktu yang sama",
+      "dampak": "N efektif jauh di bawah jumlah sinyal",
+      "tindakan": "Hitung N efektif per klaster 60 menit",
+      "doc": [
+        "DOC-11"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "X-03",
+      "mesin": "LINTAS",
+      "tingkat": "SEDANG",
+      "jenis": "TEMUAN",
+      "judul": "Tidak ada kalender event yang terverifikasi di mana pun",
+      "bukti": "data/events.json kosong; scv2 events.yaml satu FOMC; sctn event_blackouts kosong",
+      "dampak": "Entry menjelang FOMC/CPI tidak terblokir",
+      "tindakan": "Isi data/events.json dari sumber resmi atau pastikan fetch resmi berhasil",
+      "doc": [
+        "DOC-10",
+        "DOC-20"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "X-04",
+      "mesin": "LINTAS",
+      "tingkat": "INFO",
+      "jenis": "PERTANYAAN-VERIFIKASI",
+      "judul": "Pemetaan trigger dan konfirmasi close per mesin masih berstatus docstring",
+      "bukti": "config/definitions.json petaTriggerMesin status \"docstring\" untuk scv2, scv4, scv5 BREAKOUT/RANGE_EDGE, scv6, sctn",
+      "dampak": "Flag LAWAN_TREN memakai asumsi konservatif sampai dibuktikan",
+      "tindakan": "Baca kode trigger tiap mesin; naikkan status ke kode_dibaca dengan bukti baris",
+      "doc": [
+        "DOC-02"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    },
+    {
+      "id": "X-05",
+      "mesin": "LINTAS",
+      "tingkat": "INFO",
+      "jenis": "PERTANYAAN-VERIFIKASI",
+      "judul": "Deteksi three-tap/wolf dan FVG di mesin: TIDAK TERVERIFIKASI",
+      "bukti": "Kode keenam mesin belum dicari khusus untuk pola ini",
+      "dampak": "Tidak boleh disimpulkan \"tidak ada\"",
+      "tindakan": "Cari kata kunci fvg/three_tap/wolf di kode lalu perbarui",
+      "doc": [
+        "DOC-22"
+      ],
+      "status": "BARU",
+      "sumber": "seed"
+    }
+  ]
+}

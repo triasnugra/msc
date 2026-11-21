@@ -1,0 +1,6 @@
+{"signals":[
+ {"id":"BTC-1794000000","symbol":"BTC","direction":"long","trigger":"T1","level_label":"range low","time":"2026-11-10T10:00:00+00:00","entry":100,"stop":99,"tp1":101.5,"tp2":103,"score":80,"status":"SL","r":-1.04,"closed_at":"2026-11-10T11:00:00+00:00"},
+ {"id":"ETH-1794003600","symbol":"ETH","direction":"short","trigger":"T2","level_label":"range high","time":"2026-11-10T12:00:00+00:00","entry":200,"stop":202,"tp1":197,"tp2":194,"score":78,"status":"TP1_BE","r":0.56,"closed_at":"2026-11-10T13:00:00+00:00"},
+ {"id":"SOL-1794007200","symbol":"SOL","direction":"long","trigger":"T3","level_label":"fib 0.75","time":"2026-11-10T14:00:00+00:00","entry":50,"stop":49.5,"tp1":50.8,"tp2":51.5,"score":76,"status":"OPEN","r":0.0,"closed_at":null},
+ {"id":"PEPE-1794010800","symbol":"PEPE","direction":"long","trigger":"T1","level_label":"x","time":"2026-11-10T15:00:00+00:00","entry":1,"stop":1,"tp1":1.1,"tp2":1.2,"score":75,"status":"INVALID","r":0.0,"closed_at":null}
+]}

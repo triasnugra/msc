@@ -1,0 +1,12 @@
+{
+  "name": "msc-monitor",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Monitor msc v2: memantau 6 mesin scalping (sc, scv2, scv4, scv5, scv6, sctn). Tidak mengubah mesin.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test",
+    "build": "node build/render.mjs"
+  }
+}
